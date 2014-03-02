@@ -484,20 +484,20 @@ class Abe:
             value_out = int(value_out)
             seconds = int(seconds)
             satoshis = int(satoshis)
-#            ss = int(ss)
-#            total_ss = int(total_ss)
+            ss = int(ss)
+            total_ss = int(total_ss)
+
+            if satoshis == 0:
+                avg_age = '&nbsp;'
+            else:
+                avg_age = '%5g' % (ss / satoshis / 86400.0)
 #
-#            if satoshis == 0:
-#                avg_age = '&nbsp;'
-#            else:
-#                avg_age = '%5g' % (ss / satoshis / 86400.0)
-#
-#            #if total_ss <= 0:
-#            #    percent_destroyed = '&nbsp;'
-#            #else:
-#            #    percent_destroyed = '%5g' % (
-#            #        100.0 - (100.0 * ss / total_ss)) + '%'
-            percent_destroyed = '0'
+            if total_ss <= 0:
+                percent_destroyed = '&nbsp;'
+            else:
+                percent_destroyed = '%5g' % (
+                    100.0 - (100.0 * ss / total_ss)) + '%'
+           percent_destroyed = '0'
             body += [
                 '<tr><td><a href="', page['dotdot'], 'block/',
                 abe.store.hashout_hex(hash),
@@ -507,7 +507,7 @@ class Abe:
                 '</td><td>', format_satoshis(value_out, chain),
                 '</td><td>', util.calculate_difficulty(int(nBits)),
                 '</td><td>', format_satoshis(satoshis, chain),
-#                '</td><td>', avg_age,
+                '</td><td>', avg_age,
                 '</td><td>', '%5g' % (seconds / 86400.0),
                 '</td><td>', percent_destroyed,
                 ['</td><td>', '%8g' % ss,
