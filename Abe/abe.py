@@ -48,9 +48,21 @@ COPYRIGHT = "Abe developers"
 COPYRIGHT_URL = 'https://github.com/bitcoin-abe'
 
 DONATIONS_POT = 'POTADDRESS'
+TIME1970 = time.strptime('1970-01-01','%Y-%m-%d')
+EPOCH1970 = calendar.timegm(TIME1970)
 
-potchain.png" alt="" width="220"></a>
-    </div>
+DEFAULT_CONTENT_TYPE = "text/html; charset=utf-8"
+DEFAULT_HOMEPAGE = "chains";
+DEFAULT_TEMPLATE = """
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css"
+     href="%(dotdot)s%(STATIC_PATH)sabe.css" />
+    <link rel="shortcut icon" href="%(dotdot)s%(STATIC_PATH)sfavicon.ico" />
+    <title>%(title)s</title>
+</head>
+<body>
     <div class="content">
         <h1 class="pull-left">%(h1)s</h1><br>
         %(body)s
@@ -497,7 +509,9 @@ class Abe:
             else:
                 percent_destroyed = '%5g' % (
                     100.0 - (100.0 * ss / total_ss)) + '%'
-           percent_destroyed = '0'
+	   
+	    percent_destroyed = '0'
+
             body += [
                 '<tr><td><a href="', page['dotdot'], 'block/',
                 abe.store.hashout_hex(hash),
